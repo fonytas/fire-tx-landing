@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MulticastApi } from "./api";
-import multicasts from "@/config/build/multicasts.local.json"
+import multicasts from "@/config/build/multicasts.example.json"
 
 const multicastApis: MulticastApi[] = [];
 

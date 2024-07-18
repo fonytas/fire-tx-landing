@@ -36,5 +36,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# build time json config
 *.local.json
