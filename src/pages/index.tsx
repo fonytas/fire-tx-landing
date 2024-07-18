@@ -16,14 +16,38 @@ const LandingPage = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [total, setTotal] = useState<number>(0);
 
+    let intervalIdRandom: any
+
     useEffect(() => {
         if (currentStep === 1) {
             setTimeout(() => {
                 setCurrentStep(2)
-            }, 3000)
+            }, 2500)
         }
 
+        if (currentStep === 2) {
+            randomizeNumber()
+            intervalIdRandom = setInterval(() => {
+                randomizeNumber()
+                }, 2500);
+        }
+
+        return () => {
+            clearInterval(intervalIdRandom);
+        };
+
     }, [currentStep])
+
+    const randomizeNumber = () => {
+        const randomNumber = getRandomNumber(MIN, MAX);
+        setTotal(prevTotal => {
+            const updatesNumber = prevTotal + randomNumber
+            if (updatesNumber >= TOTAL) {
+                clearInterval(intervalIdRandom);
+            }
+            return prevTotal + randomNumber
+        });
+    }
 
     useEffect(() => {
         if (total >= TOTAL) {
@@ -32,23 +56,6 @@ const LandingPage = () => {
             }, 2000)
         }
     }, [total])
-
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-        const randomNumber = getRandomNumber(MIN, MAX);
-        setTotal(prevTotal => {
-            const updatesNumber = prevTotal + randomNumber
-            if (updatesNumber >= TOTAL) {
-                clearInterval(intervalId);
-            }
-            return prevTotal + randomNumber
-        });
-        }, 2500);
-    
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, []);
 
     const getRandomNumber = (min: number, max: number): number => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
