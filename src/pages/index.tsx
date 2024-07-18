@@ -20,7 +20,7 @@ const LandingPage = () => {
         if (currentStep === 1) {
             setTimeout(() => {
                 setCurrentStep(2)
-            }, 2500)
+            }, 3000)
         }
 
     }, [currentStep])
@@ -77,7 +77,7 @@ const LandingPage = () => {
             )
             case 1:
                 return (
-                    <div className="lottieWrapper" onClick={() => setCurrentStep(2)}>
+                    <div className="lottieWrapper">
                         <div className='animationWrapper'>
                             <Lottie 
                                 options={{
